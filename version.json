@@ -1,12 +1,12 @@
 {
-  "versionCode": 16,
-  "versionName": "v1.16",
+  "versionCode": 17,
+  "versionName": "v1.17",
   "publishedAt": "2026-11-21",
   "notes": [
-    "第九批补缺机身：经典胶片单反与旁轴、电影机、运动相机与航拍机型",
-    "补充少量缺口镜头并补全历史镜头画幅字段",
-    "更新清单改由原生壳读取；资料库机身 1091 台、镜头 1965 支"
+    "第十批镜头补缺：唯卓仕 AF 9mm F2.8 等 APS-C 超广角；腾龙 G2 与适马 DG DN / DC DN 主力镜头补齐尼康 Z、佳能 RF / RF-S 卡口；富士 XF 与 GF 中画幅定焦",
+    "镜头搜索纳入光圈与品牌别名；新增平板与宽屏响应式多列排版",
+    "资料库机身 1091 台、镜头 1976 支"
   ],
-  "apkUrl": "https://cdn.jsdelivr.net/gh/lu72625252/photohq@main/photohq-v1.16.apk",
+  "apkUrl": "https://cdn.jsdelivr.net/gh/lu72625252/photohq@main/photohq-v1.17.apk",
   "webUrl": "https://cdn.jsdelivr.net/gh/lu72625252/photohq@main/index.html"
 }
