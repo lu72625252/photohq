@@ -1,11 +1,12 @@
 {
-  "versionCode": 15,
-  "versionName": "v1.15",
-  "publishedAt": "2026-11-20",
+  "versionCode": 16,
+  "versionName": "v1.16",
+  "publishedAt": "2026-11-21",
   "notes": [
-    "首页新增检查更新，应用内下载并安装",
-    "资料库机身 1064 台、镜头 1961 支"
+    "第九批补缺机身：经典胶片单反与旁轴、电影机、运动相机与航拍机型",
+    "补充少量缺口镜头并补全历史镜头画幅字段",
+    "更新清单改由原生壳读取；资料库机身 1091 台、镜头 1965 支"
   ],
-  "apkUrl": "https://lu72625252.github.io/photohq/photohq-v1.15.apk",
+  "apkUrl": "https://lu72625252.github.io/photohq/photohq-v1.16.apk",
   "webUrl": "https://lu72625252.github.io/photohq/index.html"
 }
