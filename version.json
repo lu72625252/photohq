@@ -1,12 +1,12 @@
 {
-  "versionCode": 17,
-  "versionName": "v1.17",
+  "versionCode": 18,
+  "versionName": "v1.18",
   "publishedAt": "2026-11-21",
   "notes": [
-    "第十批镜头补缺：唯卓仕 AF 9mm F2.8 等 APS-C 超广角；腾龙 G2 与适马 DG DN / DC DN 主力镜头补齐尼康 Z、佳能 RF / RF-S 卡口；富士 XF 与 GF 中画幅定焦",
-    "镜头搜索纳入光圈与品牌别名；新增平板与宽屏响应式多列排版",
-    "资料库机身 1091 台、镜头 1976 支"
+    "放开竖屏锁定：应用跟随传感器方向，平板横握可自动横屏；旋转不重建页面，宽屏多列布局自动生效",
+    "第十一批收录：2025 年新机 A7 V、Z5 II、R6 Mark III、S1 II、X-T30 III、X2D II 100C、R50 V、OM-5 II、RX1R III；RF 75-300、RF 20/85 F1.4 L VCM、RF 45 F1.2 STM、FE 28-70 OSS II 等新镜头",
+    "资料库机身 1100 台、镜头 1981 支"
   ],
-  "apkUrl": "https://cdn.jsdelivr.net/gh/lu72625252/photohq@main/photohq-v1.17.apk",
+  "apkUrl": "https://cdn.jsdelivr.net/gh/lu72625252/photohq@main/photohq-v1.18.apk",
   "webUrl": "https://cdn.jsdelivr.net/gh/lu72625252/photohq@main/index.html"
 }
