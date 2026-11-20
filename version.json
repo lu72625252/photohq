@@ -7,6 +7,6 @@
     "补充少量缺口镜头并补全历史镜头画幅字段",
     "更新清单改由原生壳读取；资料库机身 1091 台、镜头 1965 支"
   ],
-  "apkUrl": "https://lu72625252.github.io/photohq/photohq-v1.16.apk",
-  "webUrl": "https://lu72625252.github.io/photohq/index.html"
+  "apkUrl": "https://cdn.jsdelivr.net/gh/lu72625252/photohq@main/photohq-v1.16.apk",
+  "webUrl": "https://cdn.jsdelivr.net/gh/lu72625252/photohq@main/index.html"
 }

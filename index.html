@@ -6818,7 +6818,12 @@ window.__PHQ_S2TP__ = {"公里":"公里","里程":"里程","里面":"裡面","�
 
   // ---------- 检查更新（首页公告上方） ----------
   var APP_VERSION = { code: 16, name: 'v1.16' };
-  var UPDATE_URL = 'https://lu72625252.github.io/photohq/version.json';
+  var CHECK_URLS = [
+    'https://cdn.jsdelivr.net/gh/lu72625252/photohq@main/version.json',
+    'https://lu72625252.github.io/photohq/version.json'
+  ];
+  var UPDATE_URL = CHECK_URLS[0];
+  var checkIdx = 0;
   var updateCard = null;
   var pendingApkPath = '';
 
@@ -6857,6 +6862,11 @@ window.__PHQ_S2TP__ = {"公里":"公里","里程":"里程","里面":"裡面","�
       try {
         var btn = document.querySelector('#phq-update-card .phq-update-btn');
         var st = document.querySelector('#phq-update-card .phq-update-status');
+        var bridge = window.PHQBridge;
+        if (bridge && typeof bridge.checkUpdate === 'function' && checkIdx < CHECK_URLS.length - 1) {
+          checkIdx++;
+          try { bridge.checkUpdate(CHECK_URLS[checkIdx]); return; } catch (e) {}
+        }
         if (st) updateStatus(st, msg || t('updateOffline'), 'warn');
         if (btn) { btn.disabled = false; btn.textContent = t('updateBtn'); }
       } catch (e) {}
@@ -6927,10 +6937,11 @@ window.__PHQ_S2TP__ = {"公里":"公里","里程":"里程","里面":"裡面","�
     btn.disabled = true;
     btn.textContent = t('updateChecking');
     updateStatus(statusEl, '');
+    checkIdx = 0;
     var bridge = window.PHQBridge;
     if (bridge && typeof bridge.checkUpdate === 'function') {
       try {
-        bridge.checkUpdate(UPDATE_URL);
+        bridge.checkUpdate(CHECK_URLS[0]);
         return;
       } catch (e) { /* 落到网页 fetch 兜底 */ }
     }
