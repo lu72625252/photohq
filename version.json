@@ -1,0 +1,11 @@
+{
+  "versionCode": 15,
+  "versionName": "v1.15",
+  "publishedAt": "2026-11-20",
+  "notes": [
+    "首页新增检查更新，应用内下载并安装",
+    "资料库机身 1064 台、镜头 1961 支"
+  ],
+  "apkUrl": "https://lu72625252.github.io/photohq/photohq-v1.15.apk",
+  "webUrl": "https://lu72625252.github.io/photohq/index.html"
+}
