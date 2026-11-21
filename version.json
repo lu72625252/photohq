@@ -1,12 +1,11 @@
 {
-  "versionCode": 22,
-  "versionName": "v1.22",
+  "versionCode": 23,
+  "versionName": "v1.23",
   "publishedAt": "2026-11-21",
   "notes": [
-    "流光卡片提高白与白银占比，更贴近 iOS 磨砂玻璃；新增「流动白」缓慢漂移的银白光斑背景，设定里可开关",
-    "设定各选项增加可见白框，选中态白框加亮底，开关与档位一眼可辨",
-    "评级徽章按旗舰 / 扎实 / 均衡 / 入门 / 基础 / 保守六档重新配色，层级递进更清晰"
+    "底部导航改为居中悬浮的半透明磨砂玻璃胶囊，可透出后方内容与流动光斑，质感与流光卡片一致",
+    "玻璃胶囊增加银白高光描边与顶部内高光，白色调更通透，不透明黑底已移除"
   ],
-  "apkUrl": "https://lu72625252.github.io/photohq/photohq-v1.22.apk",
+  "apkUrl": "https://lu72625252.github.io/photohq/photohq-v1.23.apk",
   "webUrl": "https://lu72625252.github.io/photohq/index.html"
 }
