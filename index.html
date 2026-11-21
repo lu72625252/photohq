@@ -6974,10 +6974,11 @@ window.__PHQ_S2TP__ = {"公里":"公里","里程":"里程","里面":"裡面","�
       showUpdateAvailable(statusEl, btn, meta, remoteName);
       return;
     }
-    // 当前源未发现更新：记录最优结果，若还有后续源则继续探测，避免主源陈旧缓存导致误判“已是最新”
+    // 记录最优结果；仅当主源版本比本机还旧（陈旧缓存）时才继续探测备用源，
+    // 版本相等即已是最新，不再触发备用源请求，避免备用源受限导致误报离线
     if (remote > bestRemote.code) { bestRemote.code = remote; bestRemote.meta = meta; }
     var bridge = window.PHQBridge;
-    if (bridge && typeof bridge.checkUpdate === 'function' && checkIdx < CHECK_URLS.length - 1) {
+    if (remote < APP_VERSION.code && bridge && typeof bridge.checkUpdate === 'function' && checkIdx < CHECK_URLS.length - 1) {
       checkIdx++;
       try { bridge.checkUpdate(CHECK_URLS[checkIdx]); return; } catch (e) {}
     }
