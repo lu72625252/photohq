@@ -1,12 +1,12 @@
 {
-  "versionCode": 19,
-  "versionName": "v1.19",
+  "versionCode": 20,
+  "versionName": "v1.20",
   "publishedAt": "2026-11-21",
   "notes": [
-    "屏幕方向改为设定可选：默认竖屏锁定，手机误横不再自动转横屏；需要横屏时在「设定」开启「自动旋转」，偏好本地保存",
-    "更新通道加固：校验清单字段，主源读到陈旧版本时继续探测备用源，避免被旧缓存误判为已是最新",
+    "图标重制：去掉外围白色背板，改用自适应图标（深色背景 + 银线相机），圆形 / 方形遮罩下均为黑底银线",
+    "启动体验优化：深色一致背景避免冷启动白闪，首屏克制淡入过渡，关闭边缘滚动光晕",
     "资料库机身 1100 台、镜头 1981 支"
   ],
-  "apkUrl": "https://lu72625252.github.io/photohq/photohq-v1.19.apk",
+  "apkUrl": "https://lu72625252.github.io/photohq/photohq-v1.20.apk",
   "webUrl": "https://lu72625252.github.io/photohq/index.html"
 }
