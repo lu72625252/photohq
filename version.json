@@ -1,12 +1,11 @@
 {
-  "versionCode": 24,
-  "versionName": "v1.24",
+  "versionCode": 25,
+  "versionName": "v1.25",
   "publishedAt": "2026-11-21",
   "notes": [
-    "底部导航胶囊进一步去除盖板感：圆角加大、底色更透、投影更轻，磨砂玻璃与背景更融为一体",
-    "新增「柔光白」浅色主题：柔和暖白背景、白卡片深字，流光玻璃、评级徽章与设定选项按浅色适配",
-    "浅色主题下主操作按钮、光斑背景同步改为浅底深字，避免深块反白"
+    "机身品牌内搜索支持跨品牌：输入型号即可检索全部收录机身，其他品牌命中单独成组列出，点击直接进入该机型详情",
+    "修复设定 / 配件页滚动到底时，底部导航胶囊后方透出上一页残留文字的问题"
   ],
-  "apkUrl": "https://lu72625252.github.io/photohq/photohq-v1.24.apk",
+  "apkUrl": "https://lu72625252.github.io/photohq/photohq-v1.25.apk",
   "webUrl": "https://lu72625252.github.io/photohq/index.html"
 }
