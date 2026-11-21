@@ -5694,6 +5694,7 @@ window.__PHQ_S2TP__ = {"公里":"公里","里程":"里程","里面":"裡面","�
 
   var KEY = 'phq_theme';
   var KEY_LANG = 'phq_lang';
+  var KEY_ORI = 'phq_orientation';
   // 仅保留黑 / 银两套；历史存储的原色、白天主题自动回退到银色
   var THEMES = [
     { id: 'silver', name: '银色', swatch: 'linear-gradient(135deg,#16181a 50%,#c8ccd0 50%)' },
@@ -5706,12 +5707,21 @@ window.__PHQ_S2TP__ = {"公里":"公里","里程":"里程","里面":"裡面","�
     { id: 'en', name: 'English' }
   ];
 
+  // 屏幕方向：portrait 锁定竖屏（默认，避免手机误横）；sensor 跟随传感器自动旋转
+  var ORIS = [
+    { id: 'portrait', nameKey: 'oriPortrait' },
+    { id: 'sensor', nameKey: 'oriSensor' }
+  ];
+
   // 注入层可见文案三语字典（原生应用内文案暂保留中文）
   var I18N = {
     'settings': { 'zh-CN': '设定', 'zh-TW': '設定', 'en': 'Settings' },
-    'settingsSub': { 'zh-CN': '主题配色与语言，自动本地保存', 'zh-TW': '主題配色與語言，自動本機儲存', 'en': 'Theme & language, saved locally' },
+    'settingsSub': { 'zh-CN': '主题、语言与屏幕方向，自动本地保存', 'zh-TW': '主題、語言與螢幕方向，自動本機儲存', 'en': 'Theme, language & orientation, saved locally' },
     'theme': { 'zh-CN': '主题配色', 'zh-TW': '主題配色', 'en': 'Theme' },
     'language': { 'zh-CN': '语言', 'zh-TW': '語言', 'en': 'Language' },
+    'orientation': { 'zh-CN': '屏幕方向', 'zh-TW': '螢幕方向', 'en': 'Orientation' },
+    'oriPortrait': { 'zh-CN': '竖屏锁定', 'zh-TW': '直式鎖定', 'en': 'Portrait locked' },
+    'oriSensor': { 'zh-CN': '自动旋转', 'zh-TW': '自動旋轉', 'en': 'Auto rotate' },
     'lenslib': { 'zh-CN': '镜头品牌库', 'zh-TW': '鏡頭品牌庫', 'en': 'Lens Library' },
     'lenslibDesc': { 'zh-CN': '按品牌浏览全部镜头，可搜索筛选', 'zh-TW': '按品牌瀏覽全部鏡頭，可搜尋篩選', 'en': 'Browse all lenses by brand, search & filter' },
     'accessories': { 'zh-CN': '配件推荐', 'zh-TW': '配件推薦', 'en': 'Accessories' },
@@ -5777,6 +5787,7 @@ window.__PHQ_S2TP__ = {"公里":"公里","里程":"里程","里面":"裡面","�
     '像素间距': 'Pixel Pitch', '全画幅': 'Full Frame', '中画幅': 'Medium Format',
     '任意画幅与像素': 'Any format & resolution', '传感器有效像素（万）': 'Effective pixels (10k)',
     '设置': 'Settings', '主题配色': 'Theme', '语言': 'Language', '银色': 'Silver', '黑色': 'Black',
+    '屏幕方向': 'Orientation', '竖屏锁定': 'Portrait locked', '自动旋转': 'Auto rotate',
     '主题配色与语言，自动本地保存': 'Theme & language, saved locally', '相机': 'Camera',
     '前往镜头库浏览全部镜头': 'Open library to browse all lenses',
     '按品牌浏览全部镜头，可搜索筛选': 'Browse all lenses by brand, search & filter',
@@ -5878,6 +5889,17 @@ window.__PHQ_S2TP__ = {"公里":"公里","里程":"里程","里面":"裡面","�
     try { var v = localStorage.getItem(KEY_LANG); if (v && LANGS.some(function (l) { return l.id === v; })) return v; } catch (e) {}
     return 'zh-CN';
   }
+  function readOri() {
+    try { var v = localStorage.getItem(KEY_ORI); if (v === 'portrait' || v === 'sensor') return v; } catch (e) {}
+    return 'portrait';
+  }
+  function applyOrientation(id) {
+    try { localStorage.setItem(KEY_ORI, id); } catch (e) {}
+    var bridge = window.PHQBridge;
+    if (bridge && typeof bridge.setOrientation === 'function') {
+      try { bridge.setOrientation(id); } catch (e) {}
+    }
+  }
   window.__PHQ_LANG__ = readLang();
   function applyLang(id) {
     window.__PHQ_LANG__ = id;
@@ -5952,7 +5974,34 @@ window.__PHQ_S2TP__ = {"公里":"公里","里程":"里程","里面":"裡面","�
       langGroup.appendChild(btn);
     });
     body.appendChild(langGroup);
+
+    var oriGroup = document.createElement('div');
+    oriGroup.className = 'phq-page-group';
+    var oriHead = document.createElement('div');
+    oriHead.className = 'phq-acc-group';
+    oriHead.textContent = t('orientation');
+    oriGroup.appendChild(oriHead);
+    ORIS.forEach(function (ori) {
+      var btn = document.createElement('button');
+      btn.className = 'phq-theme-option';
+      btn.dataset.ori = ori.id;
+      btn.textContent = t(ori.nameKey);
+      btn.addEventListener('click', function () {
+        applyOrientation(ori.id);
+        markOriActive();
+      });
+      oriGroup.appendChild(btn);
+    });
+    body.appendChild(oriGroup);
     panel.appendChild(body);
+
+    function markOriActive() {
+      var cur = readOri();
+      Array.prototype.forEach.call(oriGroup.querySelectorAll('.phq-theme-option'), function (b) {
+        b.classList.toggle('active', b.dataset.ori === cur);
+      });
+    }
+    panel._markOriActive = markOriActive;
 
     function markLangActive() {
       var cur = window.__PHQ_LANG__;
@@ -5967,6 +6016,7 @@ window.__PHQ_S2TP__ = {"公里":"公里","里程":"里程","里面":"裡面","�
       sub.textContent = t('settingsSub');
       gh.textContent = t('theme');
       langHead.textContent = t('language');
+      oriHead.textContent = t('orientation');
     };
     document.body.appendChild(panel);
 
@@ -5984,6 +6034,7 @@ window.__PHQ_S2TP__ = {"公里":"公里","里程":"里程","里面":"裡面","�
     buildPanel();
     panel._markActive && panel._markActive();
     panel._markLangActive && panel._markLangActive();
+    panel._markOriActive && panel._markOriActive();
     window.__PHQ_PAGES__.open('settings');
   }
   function close() {
@@ -6024,8 +6075,10 @@ window.__PHQ_S2TP__ = {"公里":"公里","里程":"里程","里面":"裡面","�
   function boot() {
     apply(readTheme());
     applyLang(window.__PHQ_LANG__);
+    applyOrientation(readOri());
     buildPanel();
     panel._markLangActive && panel._markLangActive();
+    panel._markOriActive && panel._markOriActive();
     mountNav();
     bindTabDelegation();
     refreshLang();
@@ -6704,6 +6757,14 @@ window.__PHQ_S2TP__ = {"公里":"公里","里程":"里程","里面":"裡面","�
   // ================= 更新公告 =================
   var CHANGELOG = [
     {
+      version: 'v1.19', date: '2026-11-21',
+      items: [
+        '屏幕方向改为设定可选：默认竖屏锁定，手机误横不再自动转横屏；需要横屏时在「设定」开启「自动旋转」，偏好本地保存',
+        '更新通道加固：校验清单字段，主源读到陈旧版本时继续探测备用源，避免被旧缓存误判为已是最新',
+        '资料库维持机身 1100 台、镜头 1981 支'
+      ]
+    },
+    {
       version: 'v1.18', date: '2026-11-21',
       items: [
         '放开竖屏锁定：应用改为跟随传感器方向，平板横握可自动切换横屏；旋转不再重建页面，宽屏多列布局自动生效',
@@ -6836,13 +6897,14 @@ window.__PHQ_S2TP__ = {"公里":"公里","里程":"里程","里面":"裡面","�
   }
 
   // ---------- 检查更新（首页公告上方） ----------
-  var APP_VERSION = { code: 18, name: 'v1.18' };
+  var APP_VERSION = { code: 19, name: 'v1.19' };
   var CHECK_URLS = [
     'https://lu72625252.github.io/photohq/version.json',
     'https://cdn.jsdelivr.net/gh/lu72625252/photohq@main/version.json'
   ];
   var UPDATE_URL = CHECK_URLS[0];
   var checkIdx = 0;
+  var bestRemote = { code: 0, meta: null };
   var updateCard = null;
   var pendingApkPath = '';
 
@@ -6893,6 +6955,9 @@ window.__PHQ_S2TP__ = {"公里":"公里","里程":"里程","里面":"裡面","�
     onCheckDone: function (text) {
       try {
         var meta = typeof text === 'string' ? JSON.parse(text) : text;
+        if (!meta || !Number.isFinite(Number(meta.versionCode)) || !meta.versionName) {
+          throw new Error('invalid manifest');
+        }
         var btn = document.querySelector('#phq-update-card .phq-update-btn');
         var st = document.querySelector('#phq-update-card .phq-update-status');
         applyRemote(st, btn, meta);
@@ -6907,11 +6972,18 @@ window.__PHQ_S2TP__ = {"公里":"公里","里程":"里程","里面":"裡面","�
     var remoteName = (meta && meta.versionName) || ('v' + remote);
     if (remote > APP_VERSION.code) {
       showUpdateAvailable(statusEl, btn, meta, remoteName);
-    } else {
-      btn.disabled = false;
-      btn.textContent = t('updateBtn');
-      updateStatus(statusEl, t('updateLatest').replace('{v}', APP_VERSION.name), 'ok');
+      return;
     }
+    // 当前源未发现更新：记录最优结果，若还有后续源则继续探测，避免主源陈旧缓存导致误判“已是最新”
+    if (remote > bestRemote.code) { bestRemote.code = remote; bestRemote.meta = meta; }
+    var bridge = window.PHQBridge;
+    if (bridge && typeof bridge.checkUpdate === 'function' && checkIdx < CHECK_URLS.length - 1) {
+      checkIdx++;
+      try { bridge.checkUpdate(CHECK_URLS[checkIdx]); return; } catch (e) {}
+    }
+    btn.disabled = false;
+    btn.textContent = t('updateBtn');
+    updateStatus(statusEl, t('updateLatest').replace('{v}', APP_VERSION.name), 'ok');
   }
 
   function failOffline(btn, statusEl) {
@@ -6957,6 +7029,7 @@ window.__PHQ_S2TP__ = {"公里":"公里","里程":"里程","里面":"裡面","�
     btn.textContent = t('updateChecking');
     updateStatus(statusEl, '');
     checkIdx = 0;
+    bestRemote = { code: 0, meta: null };
     var bridge = window.PHQBridge;
     if (bridge && typeof bridge.checkUpdate === 'function') {
       try {
