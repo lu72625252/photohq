@@ -1,11 +1,12 @@
 {
-  "versionCode": 23,
-  "versionName": "v1.23",
+  "versionCode": 24,
+  "versionName": "v1.24",
   "publishedAt": "2026-11-21",
   "notes": [
-    "底部导航改为居中悬浮的半透明磨砂玻璃胶囊，可透出后方内容与流动光斑，质感与流光卡片一致",
-    "玻璃胶囊增加银白高光描边与顶部内高光，白色调更通透，不透明黑底已移除"
+    "底部导航胶囊进一步去除盖板感：圆角加大、底色更透、投影更轻，磨砂玻璃与背景更融为一体",
+    "新增「柔光白」浅色主题：柔和暖白背景、白卡片深字，流光玻璃、评级徽章与设定选项按浅色适配",
+    "浅色主题下主操作按钮、光斑背景同步改为浅底深字，避免深块反白"
   ],
-  "apkUrl": "https://lu72625252.github.io/photohq/photohq-v1.23.apk",
+  "apkUrl": "https://lu72625252.github.io/photohq/photohq-v1.24.apk",
   "webUrl": "https://lu72625252.github.io/photohq/index.html"
 }
